@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="action.js">
+    <title>Dashboard</title>
+
+    
+</head>
+<body>
+    <div class="button-al">
+        <div class="bt-bt-1">
+            <button
+                id="dashboard_on" class="Dashboard_on"
+                name="button" value type="button"
+                onclick="dashboard_on()"
+                >Dashboard</button>
+                <!-- Dashboard_on -->
+            </div>
+        <div class="bt-bt-1">
+            <button
+                id="datasensors_on" class="Datasensors_on"
+                name="button" value type="button"
+                onclick="datasensors_on()"
+                >Data sensors</button></div>
+        <div class="bt-bt-1">
+            <button
+                id="actionhistory_on" class="Actionhistory_on"
+                name="button" value type="button"
+                onclick="actionhistory_on()"
+                >Action history</button></div>
+        <div class="bt-bt-1">
+            <button
+            id="profile_on" class="Profile_on"
+            name="button" value type="button"
+            onclick="profile_on()"
+            >Profile</button></div>
+    </div>
+<!-- /////////////// Dashboard //////////// -->
+    <div id="Dashboard_00" class=" Dashboard_000">
+        <!-- Dashboard_00 -->
+        <div class="hang1">
+            <!-- nhiệt độ  -->
+            <div class="box box-1">
+                <div>Nhiệt độ<span class="icon-1 nhietdo"> 
+                        
+                    </span></div>
+                <div class="ND-DA-AS">
+                    <span>30</span>
+                    <span  class="ky-hieu"><sup> °C</sup></span>
+                </div>
+                <i class="xxx fas fa-thermometer-three-quarters"></i>
+            </div>
+            
+            <!-- độ ẩm  -->
+            <div class="box box-2">
+                <div>Độ ẩm<span  class="icon-1 doam"> 
+                        </span></div>
+                <div class="ND-DA-AS">
+                    <span>70</span>
+                    <span class="ky-hieu"><sup> %</sup></span>
+
+                </div>
+                <i class="xxx fas fa-tint water-icon"></i>
+                    
+            </div>
+            <!-- ánh sáng  -->
+            <div class="box box-3">
+                <div>Ánh sáng<span  class="icon-1  anhsang">
+                        
+                    </span></div>
+                <div class="ND-DA-AS">
+                    <span>1000009999</span>
+                    <span  class="ky-hieu"><sup> lux</sup></span>
+                </div>
+                <i class="xxx fas fa-sun"></i>
+            </div>
+        </div>
+        <div class="hang2">
+            <!-- biểu đồ  -->
+            <div class="box-big">
+                <div>Line chart</div>
+                <canvas id="canvas"></canvas>
+            </div>
+            <!-- button  -->
+            <div class="box-4">
+                <!-- quạt  -->
+                <div class="box-Quat">
+                    <div class="icon-2 ">
+                        <!-- <i class="xoayvong fas fa-fan fan-icon"></i> -->
+                        <i id="quat" class="xoayvong fas fa-radiation-alt"></i>
+                    </div>
+                    <div class="bt-on-off">
+                        <!-- q-b-on-on -->
+                        <button id="q-b-on-on" class="  b-on "
+                        name="button" value type="button"
+                        onclick="q_on()">on</button>
+                        <!-- q-b-off-off -->
+                        <button id="q-b-off-off" class="  b-off"
+                        name="button" value type="button"
+                        onclick="q_off()">off</button></div>
+                    
+
+                </div>
+                <!-- đèn  -->
+                <div class="box-BongDen">
+                    <div  class="icon-2">
+                        <i id="bongden"class="bongden fas fa-lightbulb"></i></div>
+                    <div class="bt-on-off">
+                        <button id="bd-b-on-on" class="b-on" id="b-on"
+                        name="button" value type="button"
+                        onclick="bd_on()">on</button>
+                        <button id="bd-b-off-off" class="b-off" id="b-off"
+                        name="button" value type="button"
+                        onclick="bd_off()">off</button></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- ///////////// Datasensors ////////////// -->
+    <div id="Datasensors_00" class="Datasensors_000">
+        <!-- datasensors_00 -->
+        <div class="data-nd">
+            <div class="search-0">
+                <label for="">Search</label>
+                <select>
+                    <option>
+                        <button>all</button>  
+                    </option>
+                    <option>
+                        <button>id</button>  
+                    </option>
+                    <option>
+                        <button>temperature (°C)</button>  
+                    </option>
+                    <option>
+                        <button>humidity (%)</button>  
+                    </option>
+                    <option>
+                        <button>light (lux)</button>  
+                    </option>
+                    <option>
+                        <button>create_at</button>  
+                    </option>
+                </select>
+                <input type="search" placeholder="Search...">
+                <button>
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <table class="" id="datasensors_table"
+                    border="1">
+                <tr>
+                    <th>id
+                        <button id="ds_id_bt_a-z" class="id_bt_a-z">▼</button>
+                        <button id="ds_id_bt_z-a" class="id_bt_z-a">▲</button>   
+                    </th>
+                    <th>temperature (°C)
+                        <button id="ds_temp_bt_a-z" class="id_bt_a-z">▼</button>
+                        <button id="ds_temp_bt_z-a" class="id_bt_z-a">▲</button> 
+                    </th>
+                    <th>humidity (%)
+                        <button id="ds_hum_bt_a-z" class="id_bt_a-z">▼</button>
+                        <button id="ds_hum_bt_z-a" class="id_bt_z-a">▲</button> 
+                    </th>
+                    <th>light (lux)
+                        <button id="ds_lux_bt_a-z" class="id_bt_a-z">▼</button>
+                        <button id="ds_lux_bt_z-a" class="id_bt_z-a">▲</button> 
+                    </th>
+                    <th>create_at
+                        <button id="ds_at_bt_a-z" class="id_bt_a-z">▼</button>
+                        <button id="ds_at_bt_z-a" class="id_bt_z-a">▲</button> 
+                    </th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>-50°C-100°C</td>
+                    <td>0%-100%</td>
+                    <td>100-500?</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>-50°C-100°C</td>
+                    <td>0%-100%</td>
+                    <td>100-500?</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>-50°C-100°C</td>
+                    <td>0%-100%</td>
+                    <td>100-500?</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>-50°C-100°C</td>
+                    <td>0%-100%</td>
+                    <td>100-500?</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>-50°C-100°C</td>
+                    <td>0%-100%</td>
+                    <td>100-500?</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>-50°C-100°C</td>
+                    <td>0%-100%</td>
+                    <td>100-500?</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>-50°C-100°C</td>
+                    <td>0%-100%</td>
+                    <td>100-500?</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>-50°C-100°C</td>
+                    <td>0%-100%</td>
+                    <td>100-500?</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>-50°C-100°C</td>
+                    <td>0%-100%</td>
+                    <td>100-500?</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>-50°C-100°C</td>
+                    <td>0%-100%</td>
+                    <td>100-500?</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>-50°C-100°C</td>
+                    <td>0%-100%</td>
+                    <td>100-500?</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>-50°C-100°C</td>
+                    <td>0%-100%</td>
+                    <td>100-500?</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>-50°C-100°C</td>
+                    <td>0%-100%</td>
+                    <td>100-500?</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>-50°C-100°C</td>
+                    <td>0%-100%</td>
+                    <td>100-500?</td>
+                    <td>2024-01-02</td>
+                </tr>
+                
+            </table>
+            <div class="button_list">
+                <button class="button_list_123">1</button>
+                <button  class="button_list_123">2</button>
+                <button  class="button_list_123">3</button>
+                
+            </div>
+        </div>
+    </div>
+<!-- //////////// Actionhistory ///////// -->
+    <div id="Actionhistory_00" class="Actionhistory_000">
+        <!-- Actionhistory_00 -->
+        <div class="action-nd">
+            <div class="search-0">
+                <label for="">Search</label>
+                <input type="date">
+                <button>
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <table class="" id="datasensors_table"
+                    border="1">
+                <tr>
+                    <th>id
+                        <button id="ac_id_bt_a-z" class="id_bt_a-z">▼</button>
+                        <button id="ac_id_bt_z-a" class="id_bt_z-a">▲</button> 
+                    </th>
+                    <th>device name
+                        <select class="select_q_l">
+                            <option>all</option>
+                            <option>led</option>
+                            <option>quat</option>
+                        </select>
+                    </th>
+                    <th>action
+                        <select class="select_q_l">
+                            <option>all</option>
+                            <option>on</option>
+                            <option>off</option>
+                        </select>
+                    </th>
+                    <th>create_at
+                        <button id="ac_at_bt_a-z" class="id_bt_a-z">▼</button>
+                        <button id="ac_at_bt_z-a" class="id_bt_z-a">▲</button> 
+                    </th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>led</td>
+                    <td>on</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>quat</td>
+                    <td>off</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>led</td>
+                    <td>off</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>quat</td>
+                    <td>on</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>led</td>
+                    <td>on</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>quat</td>
+                    <td>on</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>led</td>
+                    <td>on</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>led</td>
+                    <td>off</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>quat</td>
+                    <td>on</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>quat</td>
+                    <td>off</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>led</td>
+                    <td>off</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>quat</td>
+                    <td>on</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>led</td>
+                    <td>off</td>
+                    <td>2024-01-02</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>quat</td>
+                    <td>on</td>
+                    <td>2024-01-02</td>
+                </tr>
+                
+            </table>
+            <div class="button_list">
+                <button class="button_list_123">1</button>
+                <button  class="button_list_123">2</button>
+                <button  class="button_list_123">3</button>
+                
+            </div>
+        </div>
+    </div>
+<!-- //////////// Profile //////////// -->
+    <div id="Profile_00" class="Profile_000">
+        <!-- Profile_00 -->
+        <div class="prof-nd">
+            <div class="prof-box-1">
+                <div class="pr_img">
+                    <img src="../TH1/img_img_/pr_img.jpg" alt="">
+                </div>
+                <div class="pr_name_and">
+                    Nguyen Dieu Quyen
+                    <br>
+                    B20DCPT164-D20PTDPT
+                    <div>
+                        <a href="https://github.com/Qu-yen">github: Qu-yen</a>
+                    </div>
+                </div>
+                
+                <div>
+                    Mon hoc: PHAT TRIEN UNG DUNG IOT
+                </div>
+
+            </div>
+            <hr>
+            <div class="prof-box-2">
+                <div>
+                    <select>
+                        <option>
+                            <button></button>  
+                        </option>
+                        <option>
+                            <button>all</button>  
+                        </option>
+                        <option>
+                            <button>all</button>  
+                        </option>
+                        <option>
+                            <button>all</button>  
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- //////////////////////// -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="../TH1/action.js"></script>
+</body>
+</html>
